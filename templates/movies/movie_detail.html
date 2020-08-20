@@ -1,0 +1,92 @@
+{% extends 'movies/base.html' %}
+{% block title %} {{ movie.title }} {% endblock title %}
+{% block container %}
+<div class="container py-md-3">
+    {% endblock container %}
+
+    {% block sidebar %}
+    <div class="side-bar col-lg-4">
+        {% endblock sidebar %}
+
+        {% block movie %}
+        <div class="left-ads-display col-lg-8">
+            <div class="row">
+                <div class="desc1-left col-md-6">
+                    <img src="{{ movie.poster.url }}" class="img-fluid" alt="">
+                </div>
+                <div class="desc1-right col-md-6 pl-lg-4">
+                    <h3 class="editContent">
+                        {{ movie.title }}
+                    </h3>
+                    <h5 class="editContent"></h5>
+                    <ul>
+                        <li style="list-style: none">
+                            <span><b>Год:</b> {{ movie.year }}</span></li>
+                        <li style="list-style: none">
+                            <span><b>Страна:</b> {{ movie.country }}</span>
+                        </li>
+                        <li style="list-style: none">
+                            <span><b>Слоган:</b> {{ movie.tagline }}</span>
+                        </li>
+                        <li style="list-style: none">
+                        <span><b>Режиссер:</b>
+                            {% for director in movie.director.all %}
+                                <a href="{{ director.get_absolute_url }}">
+                                    {{ director.name }}
+                                </a>
+                            {% endfor %}
+                        </span>
+                        </li>
+                        <li style="list-style: none">
+                            <span><b>Жанр:</b>
+                        {% for genre in movie.genre.all %}
+                            {{ genre.name }}
+                        {% endfor %}
+                                    </span>
+                        </li>
+                        <li>
+                            <span><b>Бюджет:</b> {{ movie.budget }}</span></li>
+                        <li>
+                            <span><b>Сборы в США:</b> ${{ movie.fees_in_usa }}</span></li>
+                        <li>
+                            <span><b>Сборы в мире:</b> ${{ movie.fees_in_world }}</span>
+                        </li>
+                        <li>
+                            <span><b>Сборы в России:</b> ${{ movie.fees_in_russia }}</span>
+                        </li>
+                        <li>
+                            <span><b>Рейтинг на Кинопоиске:</b> {{ movie.rating }}</span>
+                        </li>
+                        <li>
+                            <span><b>ID на серваке:</b> {{ movie.film_detail_id }}</span>
+                        </li>
+                        <li>
+                            <span><b>Ссылка на скачивание:</b>
+                                <a href="http://192.168.100.59:8200/MediaItems/{{ movie.film_detail_id }}.mkv">
+                                    http://192.168.100.59:8200/MediaItems/{{ movie.film_detail_id }}.mkv
+                                </a>
+                            </span>
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+                <div class="row sub-para-w3layouts mt-5">
+
+                    <h3 class="shop-sing editContent">
+                        О фильме {{ movie.title }}
+                    </h3>
+                    <p>
+                        {% for image in movie.movieshots_set.all %}
+                        <img src="{{ image.image.url }}" class="img-movie-shots "
+                             alt="{{ image.description }}">
+                        {% endfor %}
+                    </p>
+                    <p class="editContent">
+                        {{ movie.description|safe }}
+                    </p>
+                </div>
+                {% endblock movie %}
+
