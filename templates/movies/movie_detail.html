@@ -39,10 +39,10 @@
                         </li>
                         <li style="list-style: none">
                             <span><b>Жанр:</b>
-                        {% for genre in movie.genre.all %}
-                            {{ genre.name }}
-                        {% endfor %}
-                                    </span>
+                            {% for genre in movie.genre.all %}
+                                <a href="{{ genre.get_absolute_url }}">{{ genre.name }}</a>
+                            {% endfor %}
+                            </span>
                         </li>
                         <li>
                             <span><b>Бюджет:</b> {{ movie.budget }}</span></li>
@@ -85,7 +85,9 @@
                         {% endfor %}
                     </p>
                     <p class="editContent">
-                        {{ movie.description|safe }}
+                        <b>
+                            {{ movie.description|safe }}
+                        </b>
                     </p>
                 </div>
                 {% endblock movie %}

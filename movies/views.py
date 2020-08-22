@@ -63,6 +63,12 @@ class DirectorView(GenreYear, DetailView):
     slug_field = "name"
 
 
+class GenreView(GenreYear, DetailView):
+    model = Genre
+    template_name = 'movies/genre_detail.html'
+    slug_field = "name"
+
+
 class FilterMoviesView(GenreYear, ListView):
     """Фильтр фильмов"""
     paginate_by = 5

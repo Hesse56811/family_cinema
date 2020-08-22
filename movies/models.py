@@ -47,6 +47,9 @@ class Genre(models.Model):
         verbose_name = "Жанр"
         verbose_name_plural = "Жанры"
 
+    def get_absolute_url(self):
+        return reverse('genre_detail', kwargs={"slug": self.name})
+
 
 class Movie(models.Model):
     """Фильм"""
@@ -57,7 +60,7 @@ class Movie(models.Model):
     year = models.PositiveSmallIntegerField("Дата выхода", default=2019, null=True)
     country = models.CharField("Страна", max_length=30, null=True)
     director = models.ManyToManyField(Director, verbose_name="режиссер", related_name="film_director")
-    genre = models.ManyToManyField(Genre, verbose_name="жанры")
+    genre = models.ManyToManyField(Genre, verbose_name="жанры", related_name="film_genre")
     budget = models.PositiveIntegerField("Бюджет", default=0,
                                          help_text="указывать сумму в долларах", null=True)
     fees_in_usa = models.PositiveIntegerField(

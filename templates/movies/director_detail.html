@@ -24,7 +24,7 @@
                     <li>
                         <span><b>Возраст:</b> {{ director.age }} лет</span></li>
                     <li>
-                        <span><b>Режиссер:</b>
+                        <span><b>Снял:</b>
                             {% for movie in director.film_director.all %}
                                 {{ movie.title }}
                             {% endfor %}
